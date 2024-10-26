@@ -9,7 +9,7 @@ using GLTFast.Loading;
 public class SpawnManager : MonoBehaviour
 {
 
-    public string baseURL = "https://:3001/";
+    public string baseURL = "https://10.0.0.20:3001/";
     public GameObject objectSpawn;
     private string getModelMapping = "models/glb";
 
@@ -28,7 +28,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnGLB()
     {
-        StartCoroutine(SpawnGLBAsync(baseURL));
+        StartCoroutine(SpawnGLBAsync(string.Concat(baseURL, getModelMapping)));
     }
 
     private IEnumerator SpawnGLBAsync(string urlWithParams)
@@ -41,7 +41,6 @@ public class SpawnManager : MonoBehaviour
 
         if (gltfTask.IsFaulted || gltfTask.Result == null)
         {
-            Debug.LogError("Failed to load GLTF model.");
             yield break;
         }
 
@@ -52,7 +51,6 @@ public class SpawnManager : MonoBehaviour
     }
 
     public async Task<GltfImport> LoadGLB(string urlWithParams) {
-
         // Create and configure import settings
         var settings = new ImportSettings
         {
@@ -68,6 +66,7 @@ public class SpawnManager : MonoBehaviour
 
         if (success)
         {
+            Debug.LogError($"Loading glTF from URL! URL: {urlWithParams}");
             return gltf;
         }
         else
