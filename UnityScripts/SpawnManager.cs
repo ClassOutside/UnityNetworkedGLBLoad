@@ -9,7 +9,7 @@ using GLTFast.Loading;
 public class SpawnManager : MonoBehaviour
 {
 
-    public string baseURL = "https://:3001/"
+    public string baseURL = "https://:3001/";
     public GameObject objectSpawn;
     private string getModelMapping = "models/glb";
 
